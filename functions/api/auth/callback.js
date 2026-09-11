@@ -1,8 +1,8 @@
-import { cookie, fail, randomValue, settings } from './index.js';
+import { cookie, fail, randomValue, settings, configurationError } from './index.js';
 
 export async function onRequestGet({ request, env }) {
   const config = settings(env, request);
-  if (!config) return fail('Publishing sign-in is not configured for this site.', 503);
+  if (!config) return fail(configurationError(env, request), 503);
   const url = new URL(request.url);
   const cookies = Object.fromEntries((request.headers.get('Cookie') || '').split(';').map(s => s.trim().split('=')));
   const state = cookies['__Host-kd-state'];

@@ -1,58 +1,42 @@
 # Connect publishing once
 
-The site uses Cloudflare Pages, Decap CMS with GitHub authentication, and Giscus comments. There are no separate visitor accounts. Reading is public; commenting uses GitHub; the editor requires write permission on the portfolio repository.
+The site uses Cloudflare Workers, Decap CMS with GitHub authentication, and Giscus comments. There are no separate visitor accounts. Reading is public; commenting uses GitHub; the editor requires write permission on the portfolio repository.
 
-## Deploy with the existing Cloudflare Worker
+## 1. Connect Cloudflare Workers
 
-The repository now also supports Workers through `wrangler.jsonc` and `worker/index.js`. Use your existing `kaveen-weliweriya-liyanage` Worker with:
-
-- Production branch: `main`; disable builds for other branches.
-- Build command: `npm test && npm run build`
-- Deploy command: `npx wrangler deploy`
-- Root directory: repository root.
-
-Wrangler uploads only `dist/` and bundles the existing GitHub OAuth handlers into the Worker. Do not change the assets directory to `.`. The configuration enables the production workers.dev URL and disables preview URLs.
-
-Use your HTTPS `workers.dev` address everywhere the instructions below say `YOUR-SITE.pages.dev`. Add `SITE_URL`, `GITHUB_CLIENT_ID`, and the secret `GITHUB_CLIENT_SECRET` under the Worker's **Settings → Variables and Secrets**, then redeploy. The OAuth callback is still `/api/auth/callback` and the editor is `/admin/`.
-
-The remaining Pages instructions are an alternative for an existing Pages project; creating one is not required for Workers.
-
-## 1. Connect Cloudflare Pages
-
-Create a free Cloudflare account, open **Workers & Pages → Create application → Pages → Import an existing Git repository**, and connect:
-
-`kaveenprabodhya/kaveen-weliweriya-liyanage`
-
-Use these settings:
+Use the existing `kaveen-weliweriya-liyanage` Worker connected to the GitHub repository `kaveenprabodhya/kaveen-weliweriya-liyanage`.
 
 | Setting | Value |
 | --- | --- |
 | Production branch | `main` |
-| Framework preset | None |
 | Build command | `npm test && npm run build` |
-| Build output directory | `dist` |
+| Deploy command | `npx wrangler deploy` |
 | Root directory | Repository root (leave blank) |
 | Node version | 22 (also recorded in `.node-version`) |
 
-Choose Git integration, not Direct Upload. Cloudflare will install the locked npm dependencies, run checks, build the blog, and deploy after each published commit. `functions/api/auth/` is deployed as Pages Functions; `dist/_routes.json` restricts function invocations to the sign-in routes.
+`wrangler.jsonc` sets the assets directory to `dist` and the entry point to `worker/index.js`, which routes GitHub sign-in to the existing handlers in `functions/api/auth/`. Do not set the assets directory to `.`: that would upload the repository and dependencies.
 
-Disable automatic deployments for non-production branches in Pages branch controls. This prevents editorial draft branches from receiving public preview URLs. The build also rejects Cloudflare branches other than `main`. Decap previews are available inside the editor.
+Disable builds for non-production branches so editorial drafts do not receive public deployments. The configuration disables preview URLs, and the build rejects Cloudflare branches other than `main`. Decap previews remain available inside the editor.
 
-The first deploy can complete before sign-in is configured. Save the assigned `https://YOUR-SITE.pages.dev` address. A custom domain is optional and not needed for free hosting.
+The first deploy can complete before sign-in is configured. Save the production address shown under **Domains → Worker URL**:
+
+`https://kaveen-weliweriya-liyanage.kaveen-prabodhya-99.workers.dev`
+
+Use this exact HTTPS origin for the OAuth settings below. A custom domain is optional. If you change the production domain later, update both `SITE_URL` and the GitHub OAuth app URLs.
 
 ## 2. Create a GitHub OAuth app for the editor
 
 In GitHub, open **Settings → Developer settings → OAuth Apps → New OAuth App**:
 
 - Application name: `Kaveen Desktop Editor`
-- Homepage URL: `https://YOUR-SITE.pages.dev`
-- Authorization callback URL: `https://YOUR-SITE.pages.dev/api/auth/callback`
+- Homepage URL: `https://kaveen-weliweriya-liyanage.kaveen-prabodhya-99.workers.dev`
+- Authorization callback URL: `https://kaveen-weliweriya-liyanage.kaveen-prabodhya-99.workers.dev/api/auth/callback`
 
-Register the app and generate a client secret. In **Cloudflare Pages → your project → Settings → Variables and Secrets**, add these for **Production**:
+Register the app and generate a client secret. In **Cloudflare → your Worker → Settings → Variables and Secrets**, add these for **Production**:
 
 | Name | Value |
 | --- | --- |
-| `SITE_URL` | Your exact site origin, e.g. `https://YOUR-SITE.pages.dev` (no path) |
+| `SITE_URL` | Your exact site origin, e.g. `https://kaveen-weliweriya-liyanage.kaveen-prabodhya-99.workers.dev` (no path) |
 | `GITHUB_CLIENT_ID` | The OAuth app’s client ID |
 | `GITHUB_CLIENT_SECRET` | The OAuth app’s client secret, stored as a Secret |
 
@@ -72,7 +56,7 @@ No example article or comment is published by this setup. Verify posting on your
 
 ## 4. Write and publish
 
-Visit `https://YOUR-SITE.pages.dev/admin/` directly in a browser tab and choose **Login with GitHub**.
+Visit `https://kaveen-weliweriya-liyanage.kaveen-prabodhya-99.workers.dev/admin/` directly in a browser tab and choose **Login with GitHub**.
 
 1. Open **Blog articles → New Article**.
 2. Enter your title, summary, publication date, tags, optional cover and its description.
@@ -94,20 +78,20 @@ npm run build
 npm run preview
 ```
 
-Open `http://localhost:8000`. `/admin/` loads the editor from the local bundle in `dist/`. When previewing the source folder, it falls back to the same pinned Decap release on jsDelivr with an integrity check. GitHub login still requires the deployed HTTPS Pages Function and configured OAuth app. Opening source `index.html` directly still previews the desktop; it does not generate blog posts.
+Open `http://localhost:8000`. `/admin/` loads the editor from the local bundle in `dist/`. When previewing the source folder, it falls back to the same pinned Decap release on jsDelivr with an integrity check. GitHub login still requires the deployed HTTPS Worker and configured OAuth app. Opening source `index.html` directly still previews the desktop; it does not generate blog posts.
 
 `dist/`, dependencies, and local secrets are ignored by Git. Only publish `dist/`, never the repository folder or `node_modules/`. The article template and unpublished Markdown are not copied to the public build. The repository is public, so commits and draft branches themselves are readable on GitHub; drafts are not confidential storage.
 
 ## Checks and troubleshooting
 
 - Build fails: inspect Cloudflare’s build log. Invalid dates, missing required fields, missing cover files, and covers without descriptions fail with the article slug.
-- Editor cannot load: use `npm run build` and `npm run preview`, or allow jsDelivr for a source-folder preview. In Cloudflare, the output directory must be `dist`, not the repository root.
+- Editor cannot load: use `npm run build` and `npm run preview`, or allow jsDelivr for a source-folder preview. In `wrangler.jsonc`, the assets directory must be `dist`, not the repository root.
 - Editor sign-in reports “not configured”: check the three Production variables, the exact domain, and redeploy.
 - Sign-in completes but editor does not open: use `/admin/` in its own tab, allow the sign-in popup, and confirm repository write access.
 - Comments do not load: confirm the Giscus app is installed on this repository and Discussions remains enabled; ad blockers may block the widget.
 - Free plan limits still apply to builds and the small authentication function. Static articles remain readable independently of GitHub sign-in availability.
 
-Sources: [Cloudflare static HTML](https://developers.cloudflare.com/pages/framework-guides/deploy-anything/), [Decap GitHub/OAuth](https://decapcms.org/docs/backends-overview/), [Decap article folders](https://decapcms.org/docs/collection-folder/), [Giscus](https://giscus.app/).
+Sources: [Cloudflare Workers static assets](https://developers.cloudflare.com/workers/static-assets/), [Decap GitHub/OAuth](https://decapcms.org/docs/backends-overview/), [Decap article folders](https://decapcms.org/docs/collection-folder/), [Giscus](https://giscus.app/).
 
 ## Dependency maintenance
 

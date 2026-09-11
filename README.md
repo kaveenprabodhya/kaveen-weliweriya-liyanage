@@ -26,7 +26,7 @@ blog/template.html          unpublished article scaffold (see blog/README.md)
 blog/style.css              blog/article typography and responsive layout
 blog/article-slug/          Markdown articles (index.md) and their own assets/
 admin/                     Decap editor and collection configuration
-functions/api/auth/        GitHub OAuth handler for Cloudflare Pages
+functions/api/auth/        GitHub OAuth handlers used by the Cloudflare Worker
 scripts/build.mjs          static site and blog generator
 docs/PUBLISHING.md         one-time setup and publishing guide
 ```
@@ -64,7 +64,7 @@ python3 -m http.server 8000
 
 ## Publishing and hosting
 
-Use **Cloudflare Pages with GitHub integration**. The project now has a build step for browser-based blog publishing:
+Use **Cloudflare Workers with GitHub integration**. The project now has a build step for browser-based blog publishing:
 
 ```sh
 npm ci
@@ -73,7 +73,7 @@ npm run build
 npm run preview
 ```
 
-Deploy output: `dist`. Cloudflare build command: `npm test && npm run build`. Publish branch: `main`.
+Deploy output: `dist`. Cloudflare build command: `npm test && npm run build`. Deploy command: `npx wrangler deploy`. Publish branch: `main`.
 
 Follow [the one-time connection guide](docs/PUBLISHING.md) to connect Cloudflare, set up GitHub sign-in for `/admin/`, and install Giscus. After setup, writing and publishing happen in the editor; no manual reupload is needed.
 

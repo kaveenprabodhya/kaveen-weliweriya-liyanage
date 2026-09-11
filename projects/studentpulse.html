@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StudentPulse — Academic Risk Navigator</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="../assets/portfolio-mark.svg" type="image/svg+xml">
+<style>:root{--accent:#0369a1;--accent-soft:#e0f2fe}</style>
+</head>
+<body>
+<main class="page">
+<span class="hero-kicker">Machine learning · education analytics · risk prediction</span>
+<header class="hero"><h1>StudentPulse — Academic Risk Navigator</h1><p class="dek">An end-to-end four-class prediction pipeline that turns course, assessment and VLE engagement data into early academic-risk signals.</p></header>
+<div class="meta-grid"><div><span class="meta-label">Role</span><span class="meta-value">Machine-learning developer</span></div><div><span class="meta-label">Data</span><span class="meta-value">Open University student records</span></div><div><span class="meta-label">Task</span><span class="meta-value">Withdrawn / Fail / Pass / Distinction</span></div><div><span class="meta-label">Primary model</span><span class="meta-value">Tuned XGBoost</span></div></div>
+<nav class="project-nav" aria-label="Project sections">
+<a href="#overview">Overview</a><a href="#architecture">Architecture</a><a href="#evidence">Evidence</a><a href="#engineering">Engineering</a><a href="#stack">Technology</a><a href="#repo">Repository</a>
+</nav>
+<div class="case-summary" aria-label="Case study summary"><section><h2>Problem</h2><p>How can course, assessment, and engagement records help identify students at risk of withdrawal or failure?</p></section><section><h2>Contribution</h2><p>Joined seven source datasets, engineered behavioural features, tuned an XGBoost classifier, and analysed held-out and per-class performance.</p></section><section><h2>Result</h2><p>The recorded evaluation reports 73.66% accuracy on 6,519 held-out records, with the train–test gap reduced from 4.90% to 1.01%. This is an offline evaluation, not evidence of improved student outcomes.</p></section><section><h2>Design takeaway</h2><p>Overall accuracy can hide class-specific errors. Inspecting withdrawal and failure separately gives a clearer account of model performance and its limitations.</p></section></div>
+<section id="overview">
+<div class="hero-panel"><p><strong>The model is designed around intervention value, not only overall accuracy.</strong> Seven raw datasets are joined into a single student-level modelling table, behavioural and assessment features are engineered, and the held-out evaluation reports each academic outcome separately so withdrawal detection cannot be hidden by majority-class performance.</p></div>
+
+</section>
+<section id="evidence" class="prose"><h2>Evidence of quality</h2></section>
+<div class="evidence-grid"><div class="evidence-card"><div class="metric">32,593</div><strong>student records</strong><span>The pipeline joins course, assessment, registration, demographic and VLE interaction data into one modelling dataset.</span></div><div class="evidence-card"><div class="metric">73.66%</div><strong>held-out accuracy</strong><span>The tuned XGBoost model is evaluated on 6,519 unseen student records.</span></div><div class="evidence-card"><div class="metric">4.90% → 1.01%</div><strong>train–test gap</strong><span>Regularisation and hyperparameter tuning sharply reduce the model's overfitting gap while slightly improving held-out accuracy.</span></div><div class="evidence-card"><div class="metric">97%</div><strong>withdrawals identified</strong><span>1,977 of 2,031 withdrawn students are correctly identified in the committed evaluation.</span></div><div class="evidence-card"><div class="metric">29</div><strong>engineered signals</strong><span>Features capture engagement duration, assessment performance, submissions and interaction intensity.</span></div><div class="evidence-card"><div class="metric">Persisted</div><strong>model evidence</strong><span>Best parameters, classification reports, confusion matrices, selected features and feature importance are stored as artefacts.</span></div></div>
+<section id="architecture" class="prose"><h2>How the system is structured</h2></section>
+<figure><div class="arch-flow"><div class="arch-node"><b>Raw OULAD tables</b><span>Seven source CSVs capture students, courses, assessments, registration and VLE activity.</span></div><div class="arch-node"><b>Feature pipeline</b><span>Data are joined and transformed into engagement and academic-performance features.</span></div><div class="arch-node"><b>Training split</b><span>An 80/20 partition separates model development from the held-out test records.</span></div><div class="arch-node"><b>XGBoost tuning</b><span>Regularisation and hyperparameters are tuned to improve generalisation.</span></div><div class="arch-node"><b>Evaluation</b><span>Confusion matrix, class reports, ROC/PR views and train-vs-test behaviour are preserved.</span></div><div class="arch-node"><b>Saved artefacts</b><span>Model parameters, feature importance and evaluation outputs are committed for inspection.</span></div></div><figcaption class="diagram-caption">System structure and primary data flow.</figcaption></figure>
+<div class="figure-grid">
+<figure><img src="assets/studentpulse-confusion-matrix.png" alt="StudentPulse XGBoost confusion matrix" loading="lazy"><figcaption>Held-out class behaviour for the tuned XGBoost model.</figcaption></figure>
+<figure><img src="assets/studentpulse-learning-curve.png" alt="StudentPulse XGBoost learning curve" loading="lazy"><figcaption>Training diagnostics used to assess generalisation and regularisation.</figcaption></figure>
+</div>
+<section id="engineering" class="prose"><h2>Engineering depth</h2><ul>
+<li><strong>Held-out evaluation:</strong> test records are kept separate from model fitting and the page reports the test result rather than a training score.</li>
+<li><strong>Generalisation is measured directly:</strong> the project tracks the train–test gap and tunes specifically to reduce overfitting, not merely to maximise an in-sample metric.</li>
+<li><strong>Class-level reporting:</strong> withdrawal, failure, pass and distinction outcomes are inspected separately through a confusion matrix and classification report.</li>
+<li><strong>Feature engineering is explicit:</strong> behavioural signals are built from raw interaction data rather than assuming the original tables are already model-ready.</li>
+<li><strong>Reproducible artefacts:</strong> processed splits, fitted-model metadata and visual diagnostics are stored in named project folders and the notebook can be executed from the documented environment.</li>
+</ul></section>
+<section id="stack" class="prose"><h2>Integrated technologies</h2><p>The project is intentionally shown as a system, not just a language label. These are the technologies that materially participate in the implementation.</p></section>
+<div class="tech-strip"><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python logo" loading="lazy"><span>Python</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jupyter/jupyter-original.svg" alt="Jupyter logo" loading="lazy"><span>Jupyter</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" alt="pandas logo" loading="lazy"><span>pandas</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" alt="NumPy logo" loading="lazy"><span>NumPy</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg" alt="scikit-learn logo" loading="lazy"><span>scikit-learn</span></div><div class="tech-card"><img src="https://cdn.simpleicons.org/xgboost" alt="XGBoost logo" loading="lazy"><span>XGBoost</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg" alt="Matplotlib logo" loading="lazy"><span>Matplotlib</span></div></div>
+<section id="repo" class="prose"><h2>Explore the implementation</h2><p>Repository links are kept close to the case study so a reviewer can move directly from the architectural claim to the source.</p></section>
+<div class="repo-actions"><a class="button-link" href="https://github.com/kaveenprabodhya/StudentPulse---Academic-Risk-Navigator" target="_blank" rel="noopener">View repository</a></div>
+<div class="page-footer"><span>A strong applied-ML case study because the modelling, generalisation checks and intervention-relevant class behaviour are all visible.</span></div>
+</main>
+</body>
+</html>

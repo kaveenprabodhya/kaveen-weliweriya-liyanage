@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaveen Weliweriya Liyanage</title>
+<meta name="description" content="Kaveen Weliweriya Liyanage — MSc Applied AI, University of Warwick. Portfolio, presented as a Windows XP desktop.">
+<link rel="icon" href="assets/portfolio-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/xp.css">
+<link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+
+  <!-- ============ boot screen ============ -->
+  <div id="boot-screen">
+    <div class="boot-logo">
+      <div class="icon-img" style="width:40px;height:40px" id="boot-flag"></div>
+      <div class="boot-wordmark">Kaveen Desktop<small>Applied AI · Kaveen Weliweriya Liyanage</small></div>
+    </div>
+    <div class="boot-bar"><div class="boot-bar__blocks"><span></span><span></span><span></span></div></div>
+  </div>
+
+  <!-- ============ login screen ============ -->
+  <div id="login-screen" class="hidden">
+    <div class="login-shell">
+      <div class="login-brand" aria-label="Kaveen Desktop portfolio">
+        <div class="portfolio-logo" aria-hidden="true">
+          <img class="portfolio-logo__mark" src="assets/portfolio-mark.svg" alt="">
+          <span class="portfolio-logo__text">
+            <small>APPLIED AI · RESEARCH · ENGINEERING</small>
+            <strong>Kaveen<span class="portfolio-logo__desktop">Desktop</span></strong>
+          </span>
+        </div>
+        <div class="login-message">Step inside my portfolio</div>
+      </div>
+
+      <div class="login-user-panel">
+        <button class="login-panel" id="login-panel" type="button" aria-label="Enter portfolio as Guest">
+          <span class="login-avatar-wrap"><img class="icon-img" id="login-avatar" src="assets/login-chess.svg" alt=""></span>
+          <span class="login-account"><span class="login-name">Guest</span><span class="login-hint">Explore my work <span aria-hidden="true">→</span></span></span>
+        </button>
+        <div class="login-welcome" id="login-welcome" role="status">Welcome</div>
+      </div>
+    </div>
+
+    <div class="login-footer">
+      <button class="login-footer__button" type="button" aria-label="Turn off computer">
+        <span class="login-footer__icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="white" stroke-width="2"><path d="M10 2v8M6 5a6 6 0 1 0 8 0"/></svg></span>
+        <span>Turn off computer</span>
+      </button>
+      <div class="login-footer__text">
+        Explore my projects, research, and experience.<br>
+        No password needed. Make yourself at home.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ shutdown screen ============ -->
+  <div id="shutdown-screen" class="hidden"></div>
+
+  <!-- ============ desktop ============ -->
+  <div id="desktop" class="hidden" style="opacity:0">
+    <div id="icons"></div>
+    <div id="windows-layer"></div>
+  </div>
+
+  <!-- ============ start menu ============ -->
+  <div id="start-menu" class="hidden">
+    <div class="start-menu__header">
+      <span class="icon-img"></span>
+      <span></span>
+    </div>
+    <div class="start-menu__body">
+      <div class="start-menu__col start-menu__col--left"></div>
+      <div class="start-menu__col start-menu__col--right"></div>
+    </div>
+    <div class="start-menu__footer">
+      <button class="start-menu__footer-btn" id="start-logoff"><span class="icon-img"></span>Log Off</button>
+      <button class="start-menu__footer-btn" id="start-turnoff"><span class="icon-img"></span>Turn Off Computer</button>
+    </div>
+  </div>
+
+  <!-- ============ taskbar ============ -->
+  <div id="taskbar" class="hidden" style="opacity:0">
+    <button id="start-button" aria-label="Open Kaveen Desktop Start menu" aria-controls="start-menu" aria-expanded="false"><span class="icon-img"></span>start</button>
+    <div id="taskbar-windows"></div>
+    <div id="tray">
+      <button id="tray-mute" aria-label="Mute sounds"></button>
+      <span id="clock"></span>
+    </div>
+  </div>
+
+  <script src="content/data.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/windowManager.js"></script>
+  <script src="js/apps.js"></script>
+  <script src="js/boot.js"></script>
+  <script>
+    document.getElementById("boot-flag").innerHTML = ICONS.portfolio;
+    document.getElementById("start-button").querySelector(".icon-img").innerHTML = ICONS.portfolio;
+  </script>
+</body>
+</html>

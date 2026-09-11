@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Public Health Data Insights Platform — layered Python desktop system</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="../assets/portfolio-mark.svg" type="image/svg+xml">
+<style>:root{--accent:#0f766e;--accent-soft:#ccfbf1}</style>
+</head>
+<body>
+<main class="page">
+<span class="hero-kicker">Python · software architecture · public-health data</span>
+<header class="hero"><h1>Public Health Data Insights Platform</h1><p class="dek">A desktop analytics application that deliberately separates interface, controllers, services, repositories and database infrastructure around a public-health data workflow.</p></header>
+<div class="meta-grid"><div><span class="meta-label">Context</span><span class="meta-value">MSc programming project</span></div><div><span class="meta-label">Role</span><span class="meta-value">Sole developer</span></div><div><span class="meta-label">Interface</span><span class="meta-value">CustomTkinter desktop application</span></div><div><span class="meta-label">Persistence</span><span class="meta-value">SQLite + committed schema scripts</span></div></div>
+<nav class="project-nav" aria-label="Project sections">
+<a href="#overview">Overview</a><a href="#architecture">Architecture</a><a href="#evidence">Evidence</a><a href="#engineering">Engineering</a><a href="#stack">Technology</a><a href="#repo">Repository</a>
+</nav>
+<div class="case-summary" aria-label="Case study summary"><section><h2>Problem</h2><p>A desktop analytics application that deliberately separates interface, controllers, services, repositories and database infrastructure around a public-health data workflow.</p></section><section><h2>Contribution</h2><p>The project demonstrates architecture more than raw analysis. CSV data can be validated, imported into a local database, filtered, summarized and visualised, while UI code stays outside the persistence and transformation layers. Interfaces and factories make those seams explicit even in Python, where the language does not force them.</p></section><section><h2>Result</h2><p>View, controller, service, repository, database and model responsibilities are separated into dedicated packages.</p></section><section><h2>Design takeaway</h2><p>Dependency direction is deliberate: the view does not query SQLite directly; data access is confined to repository/database layers.</p></section></div>
+<section id="overview">
+<div class="hero-panel"><p><strong>The project demonstrates architecture more than raw analysis.</strong> CSV data can be validated, imported into a local database, filtered, summarized and visualised, while UI code stays outside the persistence and transformation layers. Interfaces and factories make those seams explicit even in Python, where the language does not force them.</p></div>
+
+</section>
+<section id="evidence" class="prose"><h2>Evidence of quality</h2></section>
+<div class="evidence-grid"><div class="evidence-card"><div class="metric">Layered</div><strong>application design</strong><span>View, controller, service, repository, database and model responsibilities are separated into dedicated packages.</span></div><div class="evidence-card"><div class="metric">Interface-driven</div><strong>database seams</strong><span>Connection, query, file-reading and repository responsibilities are abstracted for testability and replacement.</span></div><div class="evidence-card"><div class="metric">Automated</div><strong>test suite</strong><span>Transformation, controller, repository and supporting logic are exercised with pytest/unittest and coverage tooling.</span></div><div class="evidence-card"><div class="metric">Versioned</div><strong>database setup</strong><span>Schema and seed SQL are committed, making the database shape reproducible across machines.</span></div><div class="evidence-card"><div class="metric">Role-aware</div><strong>application flow</strong><span>Admin and researcher accounts exercise authentication/authorisation paths in the local application.</span></div><div class="evidence-card"><div class="metric">Exportable</div><strong>analysis outputs</strong><span>Filtering, summary statistics, Matplotlib visualisations, logging and CSV export are integrated into the workflow.</span></div></div>
+<section id="architecture" class="prose"><h2>How the system is structured</h2></section>
+<figure><div class="arch-flow"><div class="arch-node"><b>CustomTkinter view</b><span>Collects user actions and presents datasets, filters and analysis outputs.</span></div><div class="arch-node"><b>Controllers</b><span>Translate interface actions into application operations.</span></div><div class="arch-node"><b>Services</b><span>Apply validation, import and analysis rules independent of presentation.</span></div><div class="arch-node"><b>Repositories</b><span>Provide the only controlled path to stored records.</span></div><div class="arch-node"><b>Database infrastructure</b><span>Connection manager, query executor and SQL scripts manage SQLite.</span></div><div class="arch-node"><b>Outputs</b><span>Summary statistics, trends, charts, logs and CSV exports are returned to the user.</span></div></div><figcaption class="diagram-caption">System structure and primary data flow.</figcaption></figure>
+
+<section id="engineering" class="prose"><h2>Engineering depth</h2><ul>
+<li><strong>Dependency direction is deliberate:</strong> the view does not query SQLite directly; data access is confined to repository/database layers.</li>
+<li><strong>Test seams are designed in:</strong> interface-backed connection and query components allow service/controller logic to be exercised without tightly binding every test to the concrete database implementation.</li>
+<li><strong>Database bootstrapping is reproducible:</strong> committed schema and seed SQL make a fresh environment reconstructable rather than dependent on an existing local file.</li>
+<li><strong>Validation and logging are first-class:</strong> import errors, data quality checks and application events have defined paths instead of being handled ad hoc in UI callbacks.</li>
+<li><strong>Reusable architecture:</strong> the public-health domain can be replaced while preserving the controller/service/repository structure, which is the main engineering value of the project.</li>
+</ul></section>
+<section id="stack" class="prose"><h2>Integrated technologies</h2><p>The project is intentionally shown as a system, not just a language label. These are the technologies that materially participate in the implementation.</p></section>
+<div class="tech-strip"><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python logo" loading="lazy"><span>Python</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg" alt="SQLite logo" loading="lazy"><span>SQLite</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg" alt="Matplotlib logo" loading="lazy"><span>Matplotlib</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git logo" loading="lazy"><span>Git</span></div></div>
+<section id="repo" class="prose"><h2>Explore the implementation</h2><p>Repository links are kept close to the case study so a reviewer can move directly from the architectural claim to the source.</p></section>
+<div class="repo-actions"><a class="button-link" href="https://github.com/kaveenprabodhya/Project-EDA-Platform" target="_blank" rel="noopener">View repository</a></div>
+<div class="page-footer"><span>A compact demonstration of layered application design, testing and data workflows in Python.</span></div>
+</main>
+</body>
+</html>

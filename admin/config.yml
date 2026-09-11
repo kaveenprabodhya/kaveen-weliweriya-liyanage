@@ -1,0 +1,33 @@
+backend:
+  name: github
+  repo: kaveenprabodhya/kaveen-weliweriya-liyanage
+  branch: main
+  auth_endpoint: api/auth
+# base_url is set to this site's origin by init.js.
+publish_mode: editorial_workflow
+media_folder: assets/blog
+public_folder: /assets/blog
+logo_url: /assets/portfolio-mark.svg
+show_preview_links: false
+collections:
+  - name: articles
+    label: Blog articles
+    label_singular: Article
+    folder: blog
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    path: '{{slug}}/index'
+    slug: '{{slug}}'
+    media_folder: assets
+    public_folder: assets
+    summary: '{{title}} — {{date}}'
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Summary, name: description, widget: text, hint: 'A short introduction for the blog listing.' }
+      - { label: Publication date, name: date, widget: datetime, date_format: 'YYYY-MM-DD', time_format: false, format: 'YYYY-MM-DD' }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Cover image, name: cover, widget: image, required: false }
+      - { label: Cover image description, name: cover_alt, widget: string, required: false }
+      - { label: Allow comments, name: comments, widget: boolean, default: true }
+      - { label: Body, name: body, widget: markdown }

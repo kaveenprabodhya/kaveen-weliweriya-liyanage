@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Amazon Electronics Sentiment — ML vs deep learning</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="../assets/portfolio-mark.svg" type="image/svg+xml">
+<style>:root{--accent:#9a3412;--accent-soft:#ffedd5}</style>
+</head>
+<body>
+<main class="page">
+<span class="hero-kicker">NLP · sentiment analysis · comparative modelling</span>
+<header class="hero"><h1>Amazon Electronics Review Sentiment Analysis</h1><p class="dek">A controlled NLP comparison of TF-IDF classical models against Word2Vec deep sequence models, with shared preprocessing, validation-based model selection and a held-out final test.</p></header>
+<div class="meta-grid"><div><span class="meta-label">Role</span><span class="meta-value">Sole author</span></div><div><span class="meta-label">Problem</span><span class="meta-value">Binary sentiment classification</span></div><div><span class="meta-label">Comparison</span><span class="meta-value">Classical ML vs deep learning</span></div><div><span class="meta-label">Evaluation</span><span class="meta-value">Validation selection + held-out test</span></div></div>
+<nav class="project-nav" aria-label="Project sections">
+<a href="#overview">Overview</a><a href="#architecture">Architecture</a><a href="#evidence">Evidence</a><a href="#engineering">Engineering</a><a href="#stack">Technology</a><a href="#repo">Repository</a>
+</nav>
+<div class="case-summary" aria-label="Case study summary"><section><h2>Problem</h2><p>A controlled NLP comparison of TF-IDF classical models against Word2Vec deep sequence models, with shared preprocessing, validation-based model selection and a held-out final test.</p></section><section><h2>Contribution</h2><p>The important part is the fairness of the comparison. Reviews are cleaned once, 3-star ratings are removed as ambiguous, every model sees the same task definition, and model selection happens on validation data before the final test set is used. The notebook therefore answers whether added model complexity earns better sentiment performance under a common protocol.</p></section><section><h2>Result</h2><p>Logistic Regression and Linear SVM are compared with TextCNN, LSTM and CNN-LSTM sequence models.</p></section><section><h2>Design takeaway</h2><p>Controlled comparison: the study keeps label definition, preprocessing and data splits shared across model families, so differences are attributable to the modelling approach rather than different inputs.</p></section></div>
+<section id="overview">
+<div class="hero-panel"><p><strong>The important part is the fairness of the comparison.</strong> Reviews are cleaned once, 3-star ratings are removed as ambiguous, every model sees the same task definition, and model selection happens on validation data before the final test set is used. The notebook therefore answers whether added model complexity earns better sentiment performance under a common protocol.</p></div>
+
+</section>
+<section id="evidence" class="prose"><h2>Evidence of quality</h2></section>
+<div class="evidence-grid"><div class="evidence-card"><div class="metric">2 families</div><strong>ML vs DL</strong><span>Logistic Regression and Linear SVM are compared with TextCNN, LSTM and CNN-LSTM sequence models.</span></div><div class="evidence-card"><div class="metric">3 splits</div><strong>train / validation / test</strong><span>Validation controls winner selection and threshold tuning; the held-out test is reserved for final comparison.</span></div><div class="evidence-card"><div class="metric">8 metrics</div><strong>multi-view evaluation</strong><span>Macro-F1, balanced accuracy, class F1, ROC-AUC and PR-oriented metrics prevent accuracy from dominating an imbalanced task.</span></div><div class="evidence-card"><div class="metric">3 explainers</div><strong>model inspection</strong><span>Linear coefficients, optional SHAP, LIME and token occlusion expose why representative predictions were made.</span></div><div class="evidence-card"><div class="metric">Leakage-aware</div><strong>feature selection</strong><span>Chi-square selection is fitted inside the TF-IDF training pipeline rather than on the full dataset.</span></div><div class="evidence-card"><div class="metric">Portable</div><strong>execution</strong><span>The same notebook workflow is documented for local Jupyter, Colab and Azure ML.</span></div></div>
+<section id="architecture" class="prose"><h2>How the system is structured</h2></section>
+<figure><div class="arch-flow"><div class="arch-node"><b>Review corpus</b><span>Amazon Electronics reviews are mapped to negative (1–2 star) and positive (4–5 star) labels.</span></div><div class="arch-node"><b>Shared preprocessing</b><span>Cleaning and tokenisation produce one common modelling corpus.</span></div><div class="arch-node"><b>Classical branch</b><span>TF-IDF + chi-square features feed Logistic Regression and Linear SVM.</span></div><div class="arch-node"><b>Deep branch</b><span>Word2Vec embeddings feed TextCNN, LSTM and CNN-LSTM architectures.</span></div><div class="arch-node"><b>Validation gate</b><span>Winners are selected by macro-F1 with balanced accuracy and negative-class F1 as tie-breakers.</span></div><div class="arch-node"><b>Held-out report</b><span>Only the selected models are compared on the final test set with explainability outputs.</span></div></div><figcaption class="diagram-caption">System structure and primary data flow.</figcaption></figure>
+
+<section id="engineering" class="prose"><h2>Engineering depth</h2><ul>
+<li><strong>Controlled comparison:</strong> the study keeps label definition, preprocessing and data splits shared across model families, so differences are attributable to the modelling approach rather than different inputs.</li>
+<li><strong>Imbalance-aware selection:</strong> macro-F1, balanced accuracy and negative-class F1 drive model selection; accuracy is treated as supporting evidence.</li>
+<li><strong>Training-only feature selection:</strong> chi-square selection sits inside the training path, avoiding the common leakage error of selecting vocabulary using the full dataset.</li>
+<li><strong>Limited winner-only tuning:</strong> the workflow avoids sweeping every model until one happens to win, which makes the final comparison easier to defend.</li>
+<li><strong>Explainability on both families:</strong> classical coefficients and local DL explanations make the comparison about behaviour as well as scores.</li>
+</ul></section>
+<section id="stack" class="prose"><h2>Integrated technologies</h2><p>The project is intentionally shown as a system, not just a language label. These are the technologies that materially participate in the implementation.</p></section>
+<div class="tech-strip"><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python logo" loading="lazy"><span>Python</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jupyter/jupyter-original.svg" alt="Jupyter logo" loading="lazy"><span>Jupyter</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" alt="pandas logo" loading="lazy"><span>pandas</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" alt="NumPy logo" loading="lazy"><span>NumPy</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg" alt="scikit-learn logo" loading="lazy"><span>scikit-learn</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow logo" loading="lazy"><span>TensorFlow</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg" alt="Matplotlib logo" loading="lazy"><span>Matplotlib</span></div></div>
+<section id="repo" class="prose"><h2>Explore the implementation</h2><p>Repository links are kept close to the case study so a reviewer can move directly from the architectural claim to the source.</p></section>
+<div class="repo-actions"><a class="button-link" href="https://github.com/kaveenprabodhya/comparative_analysis_of_amazon_electronics_reviews" target="_blank" rel="noopener">View repository</a></div>
+<div class="page-footer"><span>A methodology-first NLP project: same data, same split discipline, different modelling families.</span></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 64">
+<defs>
+<linearGradient id="r"><stop stop-color="#cf3006"/><stop offset=".4" stop-color="#ffb129"/><stop offset=".7" stop-color="#f75b0a"/><stop offset="1" stop-color="#ba3107"/></linearGradient>
+<linearGradient id="g"><stop stop-color="#426906"/><stop offset=".4" stop-color="#96cc13"/><stop offset=".7" stop-color="#b6e92b"/><stop offset="1" stop-color="#498a04"/></linearGradient>
+<linearGradient id="b"><stop stop-color="#2541b5"/><stop offset=".4" stop-color="#739df7"/><stop offset=".7" stop-color="#4876e7"/><stop offset="1" stop-color="#263caf"/></linearGradient>
+<linearGradient id="y"><stop stop-color="#d99a04"/><stop offset=".4" stop-color="#fff052"/><stop offset=".7" stop-color="#ffda24"/><stop offset="1" stop-color="#cc9e04"/></linearGradient>
+</defs>
+<g transform="translate(2 2)" stroke-width=".4">
+<path d="M13 4Q25-2 37 6L30 29Q18 22 6 28Z" fill="url(#r)" stroke="#fba445"/>
+<path d="M40 7Q53 15 67 9L60 32Q47 38 33 30Z" fill="url(#g)" stroke="#639b11"/>
+<path d="M5 31Q18 25 29 32L22 56Q10 49 0 54Z" fill="url(#b)" stroke="#7ca0f4"/>
+<path d="M32 33Q46 41 59 35L52 58Q40 65 25 57Z" fill="url(#y)" stroke="#ffe05a"/>
+</g></svg>

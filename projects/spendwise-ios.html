@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SpendWise — SwiftUI budgeting application</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="../assets/portfolio-mark.svg" type="image/svg+xml">
+<style>:root{--accent:#c2410c;--accent-soft:#ffedd5}</style>
+</head>
+<body>
+<main class="page">
+<span class="hero-kicker">iOS · SwiftUI · MVVM</span>
+<header class="hero"><img class="project-mark" src="../assets/projects/spendwise-app-icon.png" alt="SpendWise for iOS project mark"><h1>SpendWise for iOS</h1><p class="dek">A SwiftUI personal-finance application organised around MVVM, domain-specific API services, reusable chart components and a short path from transactions to budget insight.</p></header>
+<div class="meta-grid"><div><span class="meta-label">Role</span><span class="meta-value">iOS developer</span></div><div><span class="meta-label">Platform</span><span class="meta-value">iOS / SwiftUI</span></div><div><span class="meta-label">Architecture</span><span class="meta-value">MVVM + service layer</span></div><div><span class="meta-label">Domain</span><span class="meta-value">Budgets, transactions, accounts and insights</span></div></div>
+<nav class="project-nav" aria-label="Project sections">
+<a href="#overview">Overview</a><a href="#architecture">Architecture</a><a href="#evidence">Evidence</a><a href="#engineering">Engineering</a><a href="#stack">Technology</a><a href="#repo">Repository</a>
+</nav>
+<div class="case-summary" aria-label="Case study summary"><section><h2>Problem</h2><p>A SwiftUI personal-finance application organised around MVVM, domain-specific API services, reusable chart components and a short path from transactions to budget insight.</p></section><section><h2>Contribution</h2><p>The project is more than a collection of screens. Authentication, budgets, transactions, account settings and financial reporting each have dedicated models, views/view-models and API services, while shared navigation, form and chart components keep the product behaviour consistent.</p></section><section><h2>Result</h2><p>Views render state, feature view models coordinate user actions, and service types handle REST transport.</p></section><section><h2>Design takeaway</h2><p>Feature-level MVVM: state and side effects are not embedded in SwiftUI view bodies; dedicated view models mediate user actions and API results.</p></section></div>
+<section id="overview">
+<div class="hero-panel"><p><strong>The project is more than a collection of screens.</strong> Authentication, budgets, transactions, account settings and financial reporting each have dedicated models, views/view-models and API services, while shared navigation, form and chart components keep the product behaviour consistent.</p></div>
+
+</section>
+<section id="evidence" class="prose"><h2>Evidence of quality</h2></section>
+<div class="evidence-grid"><div class="evidence-card"><div class="metric">MVVM</div><strong>state separation</strong><span>Views render state, feature view models coordinate user actions, and service types handle REST transport.</span></div><div class="evidence-card"><div class="metric">Domain services</div><strong>API boundary</strong><span>Authentication, registration, transactions, budgets and chart data use dedicated service classes.</span></div><div class="evidence-card"><div class="metric">Reusable</div><strong>visual components</strong><span>Budget charts, weekly bars, progress styles, navigation and form elements are implemented as shared SwiftUI utilities.</span></div><div class="evidence-card"><div class="metric">Feature-based</div><strong>screen organisation</strong><span>Budget, transaction, home, account, settings, onboarding and notifications are grouped by product area.</span></div><div class="evidence-card"><div class="metric">Tests</div><strong>project targets</strong><span>The Xcode project includes unit-test and UI-test targets alongside the application target.</span></div><div class="evidence-card"><div class="metric">REST-backed</div><strong>data flow</strong><span>The mobile client consumes a companion API rather than keeping financial data only inside view state.</span></div></div>
+<section id="architecture" class="prose"><h2>How the system is structured</h2></section>
+<figure><div class="arch-flow"><div class="arch-node"><b>SwiftUI views</b><span>Onboarding, authentication, home, budgets, transactions, reports and settings present the product workflows.</span></div><div class="arch-node"><b>View models</b><span>Auth, registration, home, budget, transaction and account state are coordinated outside the rendering layer.</span></div><div class="arch-node"><b>API services</b><span>Feature-specific services isolate HTTP operations from view logic.</span></div><div class="arch-node"><b>Domain models</b><span>Budget, transaction, chart and user structures define the data boundary.</span></div><div class="arch-node"><b>Reusable utilities</b><span>Charts, progress indicators, navigation and form controls provide consistent UI behaviour.</span></div><div class="arch-node"><b>Companion REST API</b><span>An Express service supplies backend endpoints consumed by the iOS application.</span></div></div><figcaption class="diagram-caption">System structure and primary data flow.</figcaption></figure>
+
+<section id="engineering" class="prose"><h2>Engineering depth</h2><ul>
+<li><strong>Feature-level MVVM:</strong> state and side effects are not embedded in SwiftUI view bodies; dedicated view models mediate user actions and API results.</li>
+<li><strong>Transport isolated behind services:</strong> budget, transaction, chart, auth and registration endpoints are grouped into domain services, keeping networking concerns away from presentation code.</li>
+<li><strong>Reusable product components:</strong> custom chart, navigation, progress and form primitives reduce screen-by-screen duplication.</li>
+<li><strong>Complete product surface:</strong> the repository covers onboarding, sign-in, budgets, transaction entry/detail, financial reporting, profile and settings rather than a single demonstration view.</li>
+<li><strong>Testing targets included:</strong> unit and UI test targets are part of the Xcode project, giving the app a defined verification surface.</li>
+</ul></section>
+<section id="stack" class="prose"><h2>Integrated technologies</h2><p>The project is intentionally shown as a system, not just a language label. These are the technologies that materially participate in the implementation.</p></section>
+<div class="tech-strip"><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg" alt="Swift logo" loading="lazy"><span>Swift</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apple/apple-original.svg" alt="Apple logo" loading="lazy"><span>Apple</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js logo" loading="lazy"><span>Node.js</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" alt="Express logo" loading="lazy"><span>Express</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git logo" loading="lazy"><span>Git</span></div></div>
+<section id="repo" class="prose"><h2>Explore the implementation</h2><p>Repository links are kept close to the case study so a reviewer can move directly from the architectural claim to the source.</p></section>
+<div class="repo-actions"><a class="button-link" href="https://github.com/kaveenprabodhya/spendwise-ios-project" target="_blank" rel="noopener">View iOS repository</a><a class="button-link" href="https://github.com/kaveenprabodhya/spendwise-api" target="_blank" rel="noopener">View companion API</a></div>
+<div class="page-footer"><span>A product-oriented mobile case study with explicit state, transport and reusable UI boundaries.</span></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+<defs>
+<linearGradient id="bg" x2="0" y2="1"><stop stop-color="#b21905"/><stop offset="1" stop-color="#300700"/></linearGradient>
+<linearGradient id="gold"><stop stop-color="#623307"/><stop offset=".35" stop-color="#e7b757"/><stop offset=".55" stop-color="#fff2b4"/><stop offset=".75" stop-color="#b77a22"/><stop offset="1" stop-color="#5e3007"/></linearGradient>
+<linearGradient id="dark"><stop stop-color="#130e08"/><stop offset=".5" stop-color="#a37f39"/><stop offset="1" stop-color="#201406"/></linearGradient>
+<g id="pawn"><circle cy="-14" r="2.6"/><path d="M-3-10h6L1-7 2-2 5 1v2H-5V1l3-3 1-5Z"/></g>
+<g id="king"><path d="M-1-31h2v3h3v2H1v3H-1v-3H-4v-2h3Z"/><path d="M-4-22h8l-1 5H-3Zm1 6H3L2-9 4-3 6 0v3H-6V0l2-3 2-6Z"/><ellipse cy="-16" rx="4" ry="1.5"/><path d="M-6 0H6M-5 2H5" stroke="#e7be67" stroke-width=".6"/></g>
+</defs>
+<path fill="url(#bg)" d="M0 0h48v48H0z"/>
+<path fill="#805021" d="M0 36 48 32v16H0Z"/>
+<g fill="#d5b16c" opacity=".7"><path d="m0 40 48-5v3L0 44Zm0 7 48-5v4L0 48Z"/><path d="m6 35 6-1 12 14h-9Zm17-2 5 0 18 15H35Z"/></g>
+<g stroke="#3b240d" stroke-width=".5"><use href="#king" transform="translate(10 37) scale(.85 1)" fill="url(#dark)"/><use href="#pawn" transform="translate(22 40) scale(.8)" fill="url(#gold)"/><use href="#pawn" transform="translate(6 44) scale(.7)" fill="url(#gold)"/><use href="#king" transform="translate(39 41)" fill="url(#gold)"/><use href="#pawn" transform="translate(29 45)" fill="url(#gold)"/></g>
+</svg>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Market Basket Analyser — graph algorithms and recommendation tooling</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="../assets/portfolio-mark.svg" type="image/svg+xml">
+<style>:root{--accent:#7c3aed;--accent-soft:#ede9fe}</style>
+</head>
+<body>
+<main class="page">
+<span class="hero-kicker">Python · algorithms · market-basket analytics</span>
+<header class="hero"><h1>Market Basket Analyser</h1><p class="dek">A modular transaction-analysis toolkit that turns baskets into a co-occurrence graph, mines frequent relationships, recommends products, explores paths and generates both interactive and static reports.</p></header>
+<div class="meta-grid"><div><span class="meta-label">Role</span><span class="meta-value">Sole developer</span></div><div><span class="meta-label">Interface</span><span class="meta-value">CLI + generated reports</span></div><div><span class="meta-label">Core representation</span><span class="meta-value">Weighted co-occurrence graph</span></div><div><span class="meta-label">Quality</span><span class="meta-value">Automated tests + coverage workflow</span></div></div>
+<nav class="project-nav" aria-label="Project sections">
+<a href="#overview">Overview</a><a href="#architecture">Architecture</a><a href="#evidence">Evidence</a><a href="#engineering">Engineering</a><a href="#stack">Technology</a><a href="#repo">Repository</a>
+</nav>
+<div class="case-summary" aria-label="Case study summary"><section><h2>Problem</h2><p>A modular transaction-analysis toolkit that turns baskets into a co-occurrence graph, mines frequent relationships, recommends products, explores paths and generates both interactive and static reports.</p></section><section><h2>Contribution</h2><p>This project is valuable because the analytics are implemented as software components, not buried in a notebook. Data sources, graph operations, algorithms and visualisers are separated behind interfaces, allowing the same analyser to support recommendations, itemsets, path searches, heatmaps and interactive network output.</p></section><section><h2>Result</h2><p>Product relationships are stored as weighted adjacency data rather than recomputed independently for every analysis.</p></section><section><h2>Design takeaway</h2><p>Clear algorithm boundaries: graph traversal, filtering, co-occurrence analysis, frequent-pair mining, itemset finding, path search and recommendation each live behind focused classes.</p></section></div>
+<section id="overview">
+<div class="hero-panel"><p><strong>This project is valuable because the analytics are implemented as software components, not buried in a notebook.</strong> Data sources, graph operations, algorithms and visualisers are separated behind interfaces, allowing the same analyser to support recommendations, itemsets, path searches, heatmaps and interactive network output.</p></div>
+
+</section>
+<section id="evidence" class="prose"><h2>Evidence of quality</h2></section>
+<div class="evidence-grid"><div class="evidence-card"><div class="metric">Graph-based</div><strong>core model</strong><span>Product relationships are stored as weighted adjacency data rather than recomputed independently for every analysis.</span></div><div class="evidence-card"><div class="metric">BFS + DFS</div><strong>explicit algorithms</strong><span>Traversal and path-finding are implemented directly and exercised independently.</span></div><div class="evidence-card"><div class="metric">Apriori-style</div><strong>bundle mining</strong><span>Frequent itemsets use support pruning to control the combinatorial search.</span></div><div class="evidence-card"><div class="metric">Tested</div><strong>algorithm surface</strong><span>Graph, traversal, recommendation, itemset and visualisation components have dedicated automated tests.</span></div><div class="evidence-card"><div class="metric">Multi-output</div><strong>reporting</strong><span>The same analysis can produce CLI summaries, CSV/JSON exports, heatmaps, static graphs and interactive network views.</span></div><div class="evidence-card"><div class="metric">Extensible</div><strong>interfaces + DI</strong><span>IDataSource, IGraph and IVisualiser seams make the data and presentation layers swappable.</span></div></div>
+<section id="architecture" class="prose"><h2>How the system is structured</h2></section>
+<figure><div class="arch-flow"><div class="arch-node"><b>CSV source</b><span>Transactions are grouped into baskets through a dedicated data-source layer.</span></div><div class="arch-node"><b>Co-occurrence graph</b><span>Item pairs become weighted edges in an adjacency representation.</span></div><div class="arch-node"><b>Algorithm layer</b><span>Frequent pairs, itemsets, recommendations, BFS/DFS and path search operate over the graph.</span></div><div class="arch-node"><b>Analysis facade</b><span>MarketBasketAnalyser exposes a high-level API instead of leaking individual algorithm classes.</span></div><div class="arch-node"><b>Visualisation coordinator</b><span>Strategy-style visualisers render associations, bundles, paths, graphs and heatmaps.</span></div><div class="arch-node"><b>Report outputs</b><span>HTML, interactive network and exported result files package the analysis for review.</span></div></div><figcaption class="diagram-caption">System structure and primary data flow.</figcaption></figure>
+
+<section id="engineering" class="prose"><h2>Engineering depth</h2><ul>
+<li><strong>Clear algorithm boundaries:</strong> graph traversal, filtering, co-occurrence analysis, frequent-pair mining, itemset finding, path search and recommendation each live behind focused classes.</li>
+<li><strong>Interfaces where change is expected:</strong> data sources, graphs and visualisers are abstracted so the core analysis is not coupled to a single file loader or output format.</li>
+<li><strong>Automated verification:</strong> tests cover the graph, algorithms, data processing, high-level analyser and multiple visualisation strategies, with coverage reporting documented in the repository.</li>
+<li><strong>Operational outputs:</strong> the project does not stop at console numbers; it generates interactive network views, heatmaps, static graphs and comprehensive HTML reports.</li>
+<li><strong>Complexity awareness:</strong> the README documents time/memory behaviour for co-occurrence counting, traversal, sorting and itemset growth, demonstrating algorithmic reasoning alongside implementation.</li>
+</ul></section>
+<section id="stack" class="prose"><h2>Integrated technologies</h2><p>The project is intentionally shown as a system, not just a language label. These are the technologies that materially participate in the implementation.</p></section>
+<div class="tech-strip"><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python logo" loading="lazy"><span>Python</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" alt="pandas logo" loading="lazy"><span>pandas</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg" alt="Matplotlib logo" loading="lazy"><span>Matplotlib</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git logo" loading="lazy"><span>Git</span></div></div>
+<section id="repo" class="prose"><h2>Explore the implementation</h2><p>Repository links are kept close to the case study so a reviewer can move directly from the architectural claim to the source.</p></section>
+<div class="repo-actions"><a class="button-link" href="https://github.com/kaveenprabodhya/Project-Market-Basket-Analyser" target="_blank" rel="noopener">View repository</a></div>
+<div class="page-footer"><span>A strong software-engineering and algorithms project because the data structures, interfaces, tests and reporting are all visible.</span></div>
+</main>
+</body>
+</html>

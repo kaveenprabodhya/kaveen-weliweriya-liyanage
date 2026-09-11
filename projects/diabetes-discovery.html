@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diabetes Discovery — supervised and unsupervised learning</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="../assets/portfolio-mark.svg" type="image/svg+xml">
+<style>:root{--accent:#047857;--accent-soft:#d1fae5}</style>
+</head>
+<body>
+<main class="page">
+<span class="hero-kicker">Machine learning · public-health analytics · explainability</span>
+<header class="hero"><h1>Diabetes Discovery</h1><p class="dek">A staged public-health modelling study over CDC survey data that combines risk classification, class-imbalance experiments, explainability, population clustering and association analysis.</p></header>
+<div class="meta-grid"><div><span class="meta-label">Role</span><span class="meta-value">Sole author</span></div><div><span class="meta-label">Data</span><span class="meta-value">CDC Diabetes Health Indicators</span></div><div><span class="meta-label">Study shape</span><span class="meta-value">Supervised + unsupervised</span></div><div><span class="meta-label">Model development</span><span class="meta-value">Cross-validation + Optuna tuning</span></div></div>
+<nav class="project-nav" aria-label="Project sections">
+<a href="#overview">Overview</a><a href="#architecture">Architecture</a><a href="#evidence">Evidence</a><a href="#engineering">Engineering</a><a href="#stack">Technology</a><a href="#repo">Repository</a>
+</nav>
+<div class="case-summary" aria-label="Case study summary"><section><h2>Problem</h2><p>A staged public-health modelling study over CDC survey data that combines risk classification, class-imbalance experiments, explainability, population clustering and association analysis.</p></section><section><h2>Contribution</h2><p>The project answers two different analytical questions with two different pipelines: who appears at higher diabetes risk, and what population structures exist without using the outcome label. Separate preprocessing prevents the clustering representation from becoming a by-product of the classifier.</p></section><section><h2>Result</h2><p>The workflow uses the CDC Diabetes Health Indicators dataset with demographic, lifestyle and health variables.</p></section><section><h2>Design takeaway</h2><p>Separate paradigms, separate preprocessing: classification and clustering do not reuse transformations simply for convenience; each branch prepares data for its own objective.</p></section></div>
+<section id="overview">
+<div class="hero-panel"><p><strong>The project answers two different analytical questions with two different pipelines:</strong> who appears at higher diabetes risk, and what population structures exist without using the outcome label. Separate preprocessing prevents the clustering representation from becoming a by-product of the classifier.</p></div>
+
+</section>
+<section id="evidence" class="prose"><h2>Evidence of quality</h2></section>
+<div class="evidence-grid"><div class="evidence-card"><div class="metric">250k+</div><strong>survey respondents</strong><span>The workflow uses the CDC Diabetes Health Indicators dataset with demographic, lifestyle and health variables.</span></div><div class="evidence-card"><div class="metric">0.822</div><strong>diabetes ROC-AUC</strong><span>The tuned L1 logistic-regression path reports diabetes-vs-rest AUC around 0.822 on its test evaluation.</span></div><div class="evidence-card"><div class="metric">0.325</div><strong>best reported silhouette</strong><span>The clustering notebook compares multiple cluster counts and algorithms and records silhouette diagnostics.</span></div><div class="evidence-card"><div class="metric">5 models</div><strong>CV comparison arm</strong><span>Gradient Boosting, Naive Bayes, XGBoost, Random Forest and Logistic Regression are compared in the oversampling workflow.</span></div><div class="evidence-card"><div class="metric">Optuna</div><strong>hyperparameter search</strong><span>Model and feature-selection settings are tuned through recorded optimisation studies rather than manually guessed.</span></div><div class="evidence-card"><div class="metric">Explainable</div><strong>multiple analyses</strong><span>Classification explainability, clustering and association rules give complementary views of the same population.</span></div></div>
+<section id="architecture" class="prose"><h2>How the system is structured</h2></section>
+<figure><div class="arch-flow"><div class="arch-node"><b>Raw CDC data</b><span>Survey indicators enter a staged preprocessing workflow.</span></div><div class="arch-node"><b>Classification processor</b><span>Features are prepared for supervised learning, tuning and probability evaluation.</span></div><div class="arch-node"><b>Imbalance experiment</b><span>A separate oversampling branch compares model behaviour under class rebalancing.</span></div><div class="arch-node"><b>Explainability</b><span>The fitted classifier is interrogated to connect risk predictions to specific indicators.</span></div><div class="arch-node"><b>Clustering processor</b><span>A separate representation is built for KMeans/agglomerative population segmentation.</span></div><div class="arch-node"><b>Association analysis</b><span>Co-occurring health indicators are mined independently of the predictive model.</span></div></div><figcaption class="diagram-caption">System structure and primary data flow.</figcaption></figure>
+
+<section id="engineering" class="prose"><h2>Engineering depth</h2><ul>
+<li><strong>Separate paradigms, separate preprocessing:</strong> classification and clustering do not reuse transformations simply for convenience; each branch prepares data for its own objective.</li>
+<li><strong>Cross-validation before test evaluation:</strong> model comparison and Optuna search happen before the selected configuration is inspected on the held-out test data.</li>
+<li><strong>Imbalance is treated explicitly:</strong> the repository keeps a dedicated oversampling experiment and reports macro/class metrics rather than depending on aggregate accuracy.</li>
+<li><strong>Probability quality is considered:</strong> calibration variants, ROC/PR measures and threshold analyses appear alongside hard classifications.</li>
+<li><strong>Triangulated analysis:</strong> predictive modelling, explainability, clustering and association rules reduce the temptation to treat one model's feature importance as the whole story.</li>
+</ul></section>
+<section id="stack" class="prose"><h2>Integrated technologies</h2><p>The project is intentionally shown as a system, not just a language label. These are the technologies that materially participate in the implementation.</p></section>
+<div class="tech-strip"><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python logo" loading="lazy"><span>Python</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jupyter/jupyter-original.svg" alt="Jupyter logo" loading="lazy"><span>Jupyter</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" alt="pandas logo" loading="lazy"><span>pandas</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" alt="NumPy logo" loading="lazy"><span>NumPy</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg" alt="scikit-learn logo" loading="lazy"><span>scikit-learn</span></div><div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg" alt="Matplotlib logo" loading="lazy"><span>Matplotlib</span></div></div>
+<section id="repo" class="prose"><h2>Explore the implementation</h2><p>Repository links are kept close to the case study so a reviewer can move directly from the architectural claim to the source.</p></section>
+<div class="repo-actions"><a class="button-link" href="https://github.com/kaveenprabodhya/Diabetes-Discovery-ML-Project" target="_blank" rel="noopener">View repository</a></div>
+<div class="page-footer"><span>A broad data-science case study with explicit validation, tuning, explainability and unsupervised analysis.</span></div>
+</main>
+</body>
+</html>

@@ -2,6 +2,21 @@
 
 The site uses Cloudflare Pages, Decap CMS with GitHub authentication, and Giscus comments. There are no separate visitor accounts. Reading is public; commenting uses GitHub; the editor requires write permission on the portfolio repository.
 
+## Deploy with the existing Cloudflare Worker
+
+The repository now also supports Workers through `wrangler.jsonc` and `worker/index.js`. Use your existing `kaveen-weliweriya-liyanage` Worker with:
+
+- Production branch: `main`; disable builds for other branches.
+- Build command: `npm test && npm run build`
+- Deploy command: `npx wrangler deploy`
+- Root directory: repository root.
+
+Wrangler uploads only `dist/` and bundles the existing GitHub OAuth handlers into the Worker. Do not change the assets directory to `.`. The configuration enables the production workers.dev URL and disables preview URLs.
+
+Use your HTTPS `workers.dev` address everywhere the instructions below say `YOUR-SITE.pages.dev`. Add `SITE_URL`, `GITHUB_CLIENT_ID`, and the secret `GITHUB_CLIENT_SECRET` under the Worker's **Settings → Variables and Secrets**, then redeploy. The OAuth callback is still `/api/auth/callback` and the editor is `/admin/`.
+
+The remaining Pages instructions are an alternative for an existing Pages project; creating one is not required for Workers.
+
 ## 1. Connect Cloudflare Pages
 
 Create a free Cloudflare account, open **Workers & Pages → Create application → Pages → Import an existing Git repository**, and connect:

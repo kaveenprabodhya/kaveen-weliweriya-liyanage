@@ -4,7 +4,7 @@ The site uses Cloudflare Workers, Decap CMS with GitHub authentication, and Gisc
 
 ## 1. Connect Cloudflare Workers
 
-Use the existing `kaveen-weliweriya-liyanage` Worker connected to the GitHub repository `kaveenprabodhya/kaveen-weliweriya-liyanage`.
+Use the existing `me` Worker connected to the GitHub repository `kaveenprabodhya/kaveen-weliweriya-liyanage`.
 
 | Setting | Value |
 | --- | --- |
@@ -20,7 +20,7 @@ Disable builds for non-production branches so editorial drafts do not receive pu
 
 The first deploy can complete before sign-in is configured. Save the production address shown under **Domains → Worker URL**:
 
-`https://kaveen-weliweriya-liyanage.kaveen-prabodhya-99.workers.dev`
+`https://me.kaveen-prabodhya-99.workers.dev`
 
 Use this exact HTTPS origin for the OAuth settings below. A custom domain is optional. If you change the production domain later, update both `SITE_URL` and the GitHub OAuth app URLs.
 
@@ -29,14 +29,14 @@ Use this exact HTTPS origin for the OAuth settings below. A custom domain is opt
 In GitHub, open **Settings → Developer settings → OAuth Apps → New OAuth App**:
 
 - Application name: `Kaveen Desktop Editor`
-- Homepage URL: `https://kaveen-weliweriya-liyanage.kaveen-prabodhya-99.workers.dev`
-- Authorization callback URL: `https://kaveen-weliweriya-liyanage.kaveen-prabodhya-99.workers.dev/api/auth/callback`
+- Homepage URL: `https://me.kaveen-prabodhya-99.workers.dev`
+- Authorization callback URL: `https://me.kaveen-prabodhya-99.workers.dev/api/auth/callback`
 
 Register the app and generate a client secret. In **Cloudflare → your Worker → Settings → Variables and Secrets**, add these for **Production**:
 
 | Name | Value |
 | --- | --- |
-| `SITE_URL` | Your exact site origin, e.g. `https://kaveen-weliweriya-liyanage.kaveen-prabodhya-99.workers.dev` (no path) |
+| `SITE_URL` | Your exact site origin, e.g. `https://me.kaveen-prabodhya-99.workers.dev` (no path) |
 | `GITHUB_CLIENT_ID` | The OAuth app’s client ID |
 | `GITHUB_CLIENT_SECRET` | The OAuth app’s client secret, stored as a Secret |
 
@@ -56,7 +56,7 @@ No example article or comment is published by this setup. Verify posting on your
 
 ## 4. Write and publish
 
-Visit `https://kaveen-weliweriya-liyanage.kaveen-prabodhya-99.workers.dev/admin/` directly in a browser tab and choose **Login with GitHub**.
+Visit `https://me.kaveen-prabodhya-99.workers.dev/admin/` directly in a browser tab and choose **Login with GitHub**.
 
 1. Open **Blog articles → New Article**.
 2. Enter your title, summary, publication date, tags, optional cover and its description.

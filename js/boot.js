@@ -2,14 +2,27 @@ const reduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)")
 
 
 const VISIT_KEY = "kaveen-desktop-visited";
-let visitedThisSession = false;
+const VISIT_DURATION_MS = 48 * 60 * 60 * 1000;
+let visitExpiresAt = 0;
 function hasVisitedDesktop() {
-  try { return visitedThisSession || localStorage.getItem(VISIT_KEY) === "true"; }
-  catch (_) { return visitedThisSession; }
+  const now = Date.now();
+  try {
+    const stored = localStorage.getItem(VISIT_KEY);
+    const expiresAt = Number(stored);
+    if (Number.isFinite(expiresAt) && expiresAt > now && expiresAt <= now + VISIT_DURATION_MS) {
+      visitExpiresAt = expiresAt;
+      return true;
+    }
+    // Old permanent markers and expired/invalid values must show boot again.
+    if (stored !== null) localStorage.removeItem(VISIT_KEY);
+  } catch (_) { /* Fall back to memory when storage is unavailable. */ }
+  return visitExpiresAt > now;
 }
 function rememberDesktopVisit() {
-  visitedThisSession = true;
-  try { localStorage.setItem(VISIT_KEY, "true"); } catch (_) { /* Storage is optional. */ }
+  // Revisits and manual sign-ins do not extend the original 48-hour window.
+  if (hasVisitedDesktop()) return;
+  visitExpiresAt = Date.now() + VISIT_DURATION_MS;
+  try { localStorage.setItem(VISIT_KEY, String(visitExpiresAt)); } catch (_) { /* Storage is optional. */ }
 }
 function showDesktopImmediately() {
   document.getElementById("boot-screen").classList.add("hidden");

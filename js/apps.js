@@ -759,23 +759,49 @@ function openInternetExplorer() {
       bodyEl.classList.add("ie-browser-host");
       const frame = bodyEl.querySelector("#ie-blog-frame");
       const status = bodyEl.querySelector("#ie-page-status");
-      const goHome = () => { frame.src = homeUrl; };
-
-      bodyEl.querySelector("#ie-home").addEventListener("click", goHome);
-      bodyEl.querySelector("#ie-refresh").addEventListener("click", () => {
-        try { frame.contentWindow.location.reload(); }
-        catch (_) { frame.src = frame.src; }
+      // Iframe history belongs to the browser tab. Keep toolbar history local.
+      const entries = [new URL(homeUrl, document.baseURI).href];
+      let cursor = 0;
+      const back = bodyEl.querySelector("#ie-back");
+      const forward = bodyEl.querySelector("#ie-forward");
+      const updateButtons = () => {
+        back.disabled = cursor === 0;
+        forward.disabled = cursor === entries.length - 1;
+      };
+      const showPage = () => {
+        updateButtons();
+        status.textContent = "Loading…";
+        frame.contentWindow.location.replace(entries[cursor]);
+      };
+      const navigate = url => {
+        if (url === entries[cursor]) return;
+        entries.splice(cursor + 1);
+        entries.push(url);
+        cursor++;
+        showPage();
+      };
+      updateButtons();
+      bodyEl.querySelector("#ie-home").addEventListener("click", () => navigate(entries[0]));
+      bodyEl.querySelector("#ie-refresh").addEventListener("click", showPage);
+      back.addEventListener("click", () => {
+        if (cursor > 0) { cursor--; showPage(); }
       });
-      bodyEl.querySelector("#ie-back").addEventListener("click", () => {
-        try { frame.contentWindow.history.back(); } catch (_) {}
-      });
-      bodyEl.querySelector("#ie-forward").addEventListener("click", () => {
-        try { frame.contentWindow.history.forward(); } catch (_) {}
+      forward.addEventListener("click", () => {
+        if (cursor < entries.length - 1) { cursor++; showPage(); }
       });
       frame.addEventListener("load", () => {
         try {
-          const title = frame.contentDocument && frame.contentDocument.title;
-          status.textContent = title ? title.replace(/\s+—\s+Kaveen Weliweriya Liyanage$/, "") : "Research Notes";
+          const doc = frame.contentDocument;
+          status.textContent = doc.title || "Research Notes";
+          doc.addEventListener("click", event => {
+            const link = event.target.closest("a[href]");
+            if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.hasAttribute("download")) return;
+            const url = new URL(link.href, doc.baseURI);
+            if (url.origin !== window.location.origin || !url.pathname.startsWith(new URL(homeUrl, document.baseURI).pathname.replace(/[^/]*$/, ""))) return;
+            if (link.target && link.target !== "_self") return;
+            event.preventDefault();
+            navigate(url.href);
+          });
         } catch (_) {
           status.textContent = "Research Notes";
         }
@@ -1006,17 +1032,28 @@ function doShutdown(restart) {
     screen.classList.remove("hidden");
     if (restart) {
       screen.innerHTML = `Restarting…`;
-      setTimeout(() => window.location.reload(), 1200);
+      setTimeout(startPoweredOnSession, 1200);
     } else {
       screen.innerHTML = `Windows is shutting down…`;
       setTimeout(() => {
         screen.innerHTML = `It's now safe to turn off your computer.<br><small>(click anywhere, or press any key, to turn back on)</small>`;
-        const wake = () => window.location.reload();
+        const wake = () => {
+          screen.removeEventListener("click", wake);
+          window.removeEventListener("keydown", wake);
+          startPoweredOnSession();
+        };
         screen.addEventListener("click", wake, { once: true });
         window.addEventListener("keydown", wake, { once: true });
       }, 1300);
     }
   }, 800);
+}
+
+function startPoweredOnSession() {
+  WM.closeAll();
+  closeStartMenu();
+  document.getElementById("shutdown-screen").classList.add("hidden");
+  runBootSequence();
 }
 
 function performLogOff() {

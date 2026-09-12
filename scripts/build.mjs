@@ -49,6 +49,8 @@ export async function build({ root = process.cwd(), output = path.join(root, 'di
   }
   await mkdir(path.join(output, 'blog'), { recursive: true });
   await cp(path.join(root, 'blog/style.css'), path.join(output, 'blog/style.css'));
+  const blogStyle = `<style>${await readFile(path.join(root, "blog/style.css"), "utf8")}</style>`;
+  const inlineBlogStyle = html => html.replace(/<link rel="stylesheet" href="(?:\.\.\/)?style\.css"\s*\/?>/, () => blogStyle);
   const config = JSON.parse(await readFile(path.join(root, 'blog/comments.json'), 'utf8'));
   if (!!config.repoId !== !!config.categoryId) throw new Error('Configure both Giscus repoId and categoryId, or leave both empty.');
   const articles = [];
@@ -63,7 +65,7 @@ export async function build({ root = process.cwd(), output = path.join(root, 'di
     const target = path.join(output, 'blog', entry.name);
     await mkdir(target, { recursive: true });
     if (await exists(path.join(folder, 'assets'))) await cp(path.join(folder, 'assets'), path.join(target, 'assets'), { recursive: true });
-    await writeFile(path.join(target, 'index.html'), articleHtml(article, config));
+    await writeFile(path.join(target, 'index.html'), inlineBlogStyle(articleHtml(article, config)));
     articles.push(article);
   }
   articles.sort((a, b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug));
@@ -71,7 +73,7 @@ export async function build({ root = process.cwd(), output = path.join(root, 'di
   const listing = articles.length ? `<section id="writing"><div class="section-head"><h2>Latest writing</h2><span>${articles.length} ${articles.length === 1 ? 'article' : 'articles'}</span></div>${articles.map(a => `<a class="featured" href="${a.slug}/index.html"><time class="post-date" datetime="${a.date}">${a.date}</time><div><h3>${escapeHtml(a.title)}</h3><p>${escapeHtml(a.description)}</p></div><span class="read-arrow" aria-hidden="true">→</span></a>`).join('')}</section>` : '<p>No articles yet.</p>';
   if (!index.includes('<!-- BLOG_POSTS -->')) throw new Error('Blog index is missing the BLOG_POSTS marker');
   index = index.replace('<!-- BLOG_POSTS -->', listing);
-  await writeFile(path.join(output, 'blog/index.html'), index);
+  await writeFile(path.join(output, 'blog/index.html'), inlineBlogStyle(index));
   // Keep the desktop data in sync without editing the source content file.
   const dataFile = path.join(output, 'content/data.js');
   await writeFile(dataFile, (await readFile(dataFile, 'utf8')) + '\nSITE.blog.posts = ' + JSON.stringify(articles.map(a => ({ title: a.title, date: a.date, url: `blog/${a.slug}/index.html`, tags: a.tags }))) + ';\n');

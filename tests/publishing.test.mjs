@@ -46,6 +46,12 @@ test('Build lists published posts, copies their images, excludes drafts, rebuild
     const articles = await build({ root, today: '2026-09-11', branch: 'main' });
     assert.deepEqual(articles.map(a => a.slug), ['new-post', 'old-post']);
     const listing = await readFile(path.join(root, 'dist/blog/index.html'), 'utf8');
+    const articlePage = await readFile(path.join(root, 'dist/blog/new-post/index.html'), 'utf8');
+    const css = await readFile(path.join(root, 'blog/style.css'), 'utf8');
+    for (const page of [listing, articlePage]) {
+      assert.ok(page.includes(`<style>${css}</style>`));
+      assert.ok(!page.includes('rel="stylesheet"'));
+    }
     assert.ok(listing.indexOf('new-post/index.html') < listing.indexOf('old-post/index.html'));
     await access(path.join(root, 'dist/blog/new-post/assets/image.txt'));
     for (const file of ['.env', 'blog/draft-post', 'blog/future-post', 'blog/new-post/index.md', 'blog/template.html']) await assert.rejects(access(path.join(root, 'dist', file)));

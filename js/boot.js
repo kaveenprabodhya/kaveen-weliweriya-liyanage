@@ -70,14 +70,16 @@ function revealDesktop(withWelcomeNote) {
 }
 
 function loginNow() {
-  if (hasVisitedDesktop()) { showDesktopImmediately(); return; }
+  const returningVisitor = hasVisitedDesktop();
   document.getElementById("login-welcome").textContent = "Welcome, Guest";
   playBeep(660, 0.06);
-  revealDesktop(true);
+  revealDesktop(!returningVisitor);
 }
 
 function runBootSequence() {
   const boot = document.getElementById("boot-screen");
+  boot.classList.remove("hidden");
+  boot.style.opacity = "1";
   setTimeout(() => {
     boot.style.opacity = "0";
     setTimeout(() => {

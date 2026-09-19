@@ -570,16 +570,24 @@ function explorerRenderLocation(loc, listEl, nav) {
   if (loc.type === "projects") {
     const categories = SITE.projects.categories;
     const items = categories.flatMap((category) => category.items);
-    listEl.innerHTML = `<div class="project-catalog">${categories.map((category) => `
+    listEl.innerHTML = `<div class="project-catalog">
+      <header class="project-catalog-header">
+        <div>
+          <span class="project-catalog-eyebrow">PROJECT ARCHIVE</span>
+          <h2>Projects</h2>
+          <p>Select a project, then double-click to read the full case study.</p>
+        </div>
+        <span class="project-catalog-count">${items.length} projects</span>
+      </header>
+      ${categories.map((category) => `
       <section class="project-category">
         <h3>${escapeHtml(category.name)} <span>${category.items.length}</span></h3>
         <div class="explorer-list">${category.items.map((item) => `
-          <div class="explorer-item project-card-item" data-project-index="${items.indexOf(item)}" tabindex="0">
+          <div class="explorer-item project-card-item" data-project-index="${items.indexOf(item)}" tabindex="0" title="Double-click to open the full case study" aria-label="${escapeHtml(item.name)}. Double-click to open the full case study">
             <div class="icon-img">${iconHtml(ICONS[item.icon] || ICONS.doc)}</div>
             <div class="project-card-copy">
               <span class="project-card-title">${escapeHtml(item.name)}</span>
               <small>${escapeHtml(item.summary)}</small>
-              <em>Double-click to open case study</em>
             </div>
           </div>`).join("")}</div>
       </section>`).join("")}</div>`;

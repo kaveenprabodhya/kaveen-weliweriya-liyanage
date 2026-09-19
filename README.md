@@ -54,12 +54,19 @@ generates article HTML and updates the listing automatically.
 ## Running locally
 
 For desktop-only source previews, serve the repository locally. To include generated
-articles and the editor, use the build and preview commands in the next section:
+articles and the editor, build the site first, then run:
 
-```
+```sh
 cd kaveen-weliweriya-liyanage
-python3 -m http.server 8000
-# open http://localhost:8000
+npx --yes http-server@latest -p 8000 -a 127.0.0.1 -c-1
+# open http://127.0.0.1:8000
+```
+
+To preview the built site through the Cloudflare Worker locally:
+
+```sh
+npm run build
+npx wrangler dev
 ```
 
 ## Publishing and hosting

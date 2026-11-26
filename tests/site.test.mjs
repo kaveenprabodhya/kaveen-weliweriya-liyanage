@@ -1,0 +1,2 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {readFile,access} from 'node:fs/promises';
+test('all fragment links and local assets exist',async()=>{const html=await readFile('index.html','utf8');for(const [,id] of html.matchAll(/href="#([^"]+)"/g))assert.ok(html.includes(`id="${id}"`),id);for(const [,file] of html.matchAll(/\b(?:href|src)="((?:assets\/|style\.css|script\.js)[^"]*)"/g))if(file!=="assets/profile.jpg")await access(file);assert.ok(!html.includes('blog/'));});

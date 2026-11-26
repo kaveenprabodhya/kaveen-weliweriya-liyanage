@@ -1,104 +1,374 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kaveen Weliweriya Liyanage</title>
-<meta name="description" content="Kaveen Weliweriya Liyanage — MSc Applied AI, University of Warwick. Portfolio, presented as a Windows XP desktop.">
-<link rel="icon" href="assets/portfolio-mark.svg" type="image/svg+xml">
-<link rel="stylesheet" href="css/xp.css">
-<link rel="stylesheet" href="css/theme.css">
-</head>
-<body>
+<!doctype html>
 
-  <!-- ============ boot screen ============ -->
-  <div id="boot-screen">
-    <div class="boot-logo">
-      <div class="icon-img" style="width:40px;height:40px" id="boot-flag"></div>
-      <div class="boot-wordmark">Kaveen Desktop<small>Applied AI · Kaveen Weliweriya Liyanage</small></div>
-    </div>
-    <div class="boot-bar"><div class="boot-bar__blocks"><span></span><span></span><span></span></div></div>
-  </div>
-
-  <!-- ============ login screen ============ -->
-  <div id="login-screen" class="hidden">
-    <div class="login-shell">
-      <div class="login-brand" aria-label="Kaveen Desktop portfolio">
-        <div class="portfolio-logo" aria-hidden="true">
-          <img class="portfolio-logo__mark" src="assets/portfolio-mark.svg" alt="">
-          <span class="portfolio-logo__text">
-            <small>APPLIED AI · RESEARCH · ENGINEERING</small>
-            <strong>Kaveen<span class="portfolio-logo__desktop">Desktop</span></strong>
-          </span>
-        </div>
-        <div class="login-message">Step inside my portfolio</div>
-      </div>
-
-      <div class="login-user-panel">
-        <button class="login-panel" id="login-panel" type="button" aria-label="Enter portfolio as Guest">
-          <span class="login-avatar-wrap"><img class="icon-img" id="login-avatar" src="assets/login-chess.svg" alt=""></span>
-          <span class="login-account"><span class="login-name">Guest</span><span class="login-hint">Explore my work <span aria-hidden="true">→</span></span></span>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta
+      content="Kaveen Weliweriya Liyanage — emerging AI researcher interested in affective computing, user modelling and human-centred generative AI."
+      name="description"
+    />
+    <title>Kaveen Weliweriya Liyanage | AI Researcher</title>
+    <link href="style.css" rel="stylesheet" />
+    <link href="assets/mark.svg" rel="icon" type="image/svg+xml" />
+    <meta
+      content="Kaveen Weliweriya Liyanage | AI Researcher"
+      property="og:title"
+    />
+    <meta
+      content="Research interests in affective computing, user modelling and human-centred generative AI."
+      property="og:description"
+    />
+  </head>
+  <body>
+    <a class="skip" href="#home">Skip to content</a>
+    <header class="header">
+      <nav aria-label="Main navigation" class="nav wrap">
+        <a class="brand" href="#home"
+          ><span class="mark">KPT</span
+          ><span>Kaveen <small>Weliweriya Liyanage</small></span></a
+        ><button aria-controls="navlinks" aria-expanded="false" class="menu">
+          Menu
         </button>
-        <div class="login-welcome" id="login-welcome" role="status">Welcome</div>
+        <div class="navlinks" id="navlinks">
+          <a href="#about">About</a><a href="#research">Research</a
+          ><a href="#publications">Publications</a
+          ><a href="#education">Education</a><a href="#awards">Awards</a
+          ><a href="#projects">Projects</a><a href="#contact">Contact</a>
+        </div>
+        <a
+          class="cv"
+          download=""
+          href="assets/cv/Kaveen-Weliweriya-Liyanage-CV.pdf"
+          >Download CV <span aria-hidden="true">↗</span></a
+        >
+      </nav>
+    </header>
+    <main id="home">
+      <section class="hero wrap">
+        <div>
+          <p class="eyebrow">
+            <span class="dot"></span> AI RESEARCH · HUMAN-CENTRED COMPUTING
+          </p>
+          <h1>Kaveen Weliweriya<br />Liyanage</h1>
+          <p class="lead">
+            Human-centred generative AI, exploring emotion, behaviour and
+            individual differences.
+          </p>
+          <p class="muted">
+            Emerging AI researcher · MSc Applied Artificial Intelligence, University of Warwick
+          </p>
+          <div class="actions">
+            <a class="button primary" href="#research"
+              >Explore my research <span aria-hidden="true">↓</span></a
+            ><a class="button" href="#contact">Get in touch</a>
+          </div>
+        </div>
+        <aside aria-label="Profile portrait" class="profile">
+          <div class="portrait">
+            <svg
+              aria-hidden="true"
+              class="profile-placeholder"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              viewBox="0 0 120 120"
+            >
+              <circle cx="60" cy="42" r="20"></circle>
+              <path
+                d="M23 103v-9a37 37 0 0 1 74 0v9"
+                stroke-linecap="round"
+              ></path></svg
+            ><img
+              alt="Kaveen Weliweriya Liyanage"
+              data-src="assets/profile.jpg"
+              height="320"
+              hidden=""
+              id="profile-photo"
+              width="320"
+            />
+          </div>
+        </aside>
+      </section>
+      <div class="credentials">
+        <div class="wrap credential-grid">
+          <div>
+            <strong>Distinction</strong
+            ><span>MSc Applied AI · University of Warwick</span>
+          </div>
+          <div>
+            <strong>First Class Honours</strong
+            ><span>BSc Computing · Coventry University</span>
+          </div>
+          <div>
+            <strong>WMG Excellence Scholarship</strong
+            ><span>Academic recognition</span>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div class="login-footer">
-      <button class="login-footer__button" type="button" aria-label="Turn off computer">
-        <span class="login-footer__icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="white" stroke-width="2"><path d="M10 2v8M6 5a6 6 0 1 0 8 0"/></svg></span>
-        <span>Turn off computer</span>
-      </button>
-      <div class="login-footer__text">
-        Explore my projects, research, and experience.<br>
-        No password needed. Make yourself at home.
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ============ shutdown screen ============ -->
-  <div id="shutdown-screen" class="hidden"></div>
-
-  <!-- ============ desktop ============ -->
-  <div id="desktop" class="hidden" style="opacity:0">
-    <div id="icons"></div>
-    <div id="windows-layer"></div>
-  </div>
-
-  <!-- ============ start menu ============ -->
-  <div id="start-menu" class="hidden">
-    <div class="start-menu__header">
-      <span class="icon-img"></span>
-      <span></span>
-    </div>
-    <div class="start-menu__body">
-      <div class="start-menu__col start-menu__col--left"></div>
-      <div class="start-menu__col start-menu__col--right"></div>
-    </div>
-    <div class="start-menu__footer">
-      <button class="start-menu__footer-btn" id="start-logoff"><span class="icon-img"></span>Log Off</button>
-      <button class="start-menu__footer-btn" id="start-turnoff"><span class="icon-img"></span>Turn Off Computer</button>
-    </div>
-  </div>
-
-  <!-- ============ taskbar ============ -->
-  <div id="taskbar" class="hidden" style="opacity:0">
-    <button id="start-button" aria-label="Open Kaveen Desktop Start menu" aria-controls="start-menu" aria-expanded="false"><span class="icon-img"></span>start</button>
-    <div id="taskbar-windows"></div>
-    <div id="tray">
-      <button id="tray-mute" aria-label="Mute sounds"></button>
-      <span id="clock"></span>
-    </div>
-  </div>
-
-  <script src="content/data.js"></script>
-  <script src="js/icons.js"></script>
-  <script src="js/windowManager.js"></script>
-  <script src="js/apps.js"></script>
-  <script src="js/boot.js"></script>
-  <script>
-    document.getElementById("boot-flag").innerHTML = ICONS.portfolio;
-    document.getElementById("start-button").querySelector(".icon-img").innerHTML = ICONS.portfolio;
-  </script>
-</body>
+      <section class="section wrap" id="about">
+        <div class="section-label">01 / ABOUT</div>
+        <div>
+          <h2>About me</h2>
+          <p class="intro">
+            I am an emerging AI researcher with an MSc in Applied Artificial
+            Intelligence (Distinction) from the University of Warwick and a
+            First Class BSc (Hons) in Computing from Coventry University.
+          </p>
+          <p>
+            My research interests lie at the intersection of affective
+            computing, user modelling and human-centred generative AI, exploring
+            how intelligent systems can account for human emotions, behaviour
+            and individual differences to support more personalised experiences.
+          </p>
+        </div>
+      </section>
+      <section class="section wrap" id="research">
+        <div class="section-label">02 / RESEARCH</div>
+        <div>
+          <h2>Research interests</h2>
+          <p class="intro">
+            My research interests bring together affective computing, user
+            modelling, generative AI and human–computer interaction.
+          </p>
+          <div class="grid interests">
+            <article>
+              <span class="num">01</span>
+              <h3>Affective computing</h3>
+              <p>Modelling emotional perception and expression.</p>
+            </article>
+            <article>
+              <span class="num">02</span>
+              <h3>User modelling &amp; AI personalisation</h3>
+              <p>
+                Representing individual differences and adapting AI to users.
+              </p>
+            </article>
+            <article>
+              <span class="num">03</span>
+              <h3>NLP &amp; generative AI</h3>
+              <p>
+                Controllable and personalised AI generation across different
+                modalities.
+              </p>
+            </article>
+            <article>
+              <span class="num">04</span>
+              <h3>Human-centred AI &amp; HCI</h3>
+              <p>
+                Understanding and improving interactions between people and
+                intelligent systems.
+              </p>
+            </article>
+          </div>
+          <h3 class="subhead">Research experience</h3>
+          <article class="research-item">
+            <p class="eyebrow">MSC DISSERTATION · WARWICK · 2026</p>
+            <h3>Affective Sonic Agents for Emotion Alignment</h3>
+            <p>
+              Developed a multi-agent framework to investigate whether generated
+              sonic logos align with intended emotional targets and how
+              synthetic audience ratings vary across personality profiles. The
+              dissertation pipeline combines valence–arousal modelling,
+              independent emotion estimators and 32 OCEAN-based audience
+              personas.
+            </p>
+            <a
+              href="https://github.com/kaveenprabodhya/affective-sonic-agents-for-emotion-alignment"
+              >Source code</a
+            >
+            <p class="evidence">
+              Explore 96 audio stimuli across 16 brand briefs and 48 repeated
+              generation runs in the dissertation’s public listening gallery.
+            </p>
+            <a
+              class="demo-link"
+              href="https://kaveenprabodhya.github.io/sonic-logo-stimuli/"
+              >Listen to the audio stimuli ↗</a
+            >
+          </article>
+          <article class="research-item">
+            <p class="eyebrow">BSC DISSERTATION · 2024</p>
+            <h3>Emotionally Resonant Branding</h3>
+            <p>
+              Developed an AI-driven prototype combining facial-emotion
+              recognition, emotion–colour mapping and generative imagery for
+              music branding. Conducted a quantitative study with 191 music
+              listeners, musicians and producers to investigate acceptance,
+              usefulness, trust and ethical concerns.
+            </p>
+            <a href="https://github.com/kaveenprabodhya/reso-brand-alchemy-fyp"
+              >Repository ↗</a
+            ><a class="inline-link" href="#publications"
+              >Related publication ↗</a
+            >
+          </article>
+        </div>
+      </section>
+      <section class="section wrap" id="publications">
+        <div class="section-label">03 / PUBLICATIONS</div>
+        <div>
+          <h2>Publications</h2>
+          <article class="research-item publication">
+            <h3>
+              Emotionally Resonant Branding: The Role of AI in Synthesising
+              Dynamic Brand Images for Artists in the Music Industry
+            </h3>
+            <p><strong>K. P. T. L. W. Liyanage</strong> and H. Balalle</p>
+            <p>
+              <em>Open Journal of Applied Sciences</em>, 14(9), 2661–2678, 2024.
+            </p>
+            <a href="https://doi.org/10.4236/ojapps.2024.149175"
+              >Read paper ↗</a
+            >
+            <p class="evidence">
+              A survey-based study of music-related emotional responses and
+              adaptive artist branding (191 participants).
+            </p>
+          </article>
+        </div>
+      </section>
+      <section class="section wrap" id="education">
+        <div class="section-label">04 / EDUCATION</div>
+        <div>
+          <h2>Education</h2>
+          <article class="timeline">
+            <span>2025–2026</span>
+            <div>
+              <h3>MSc Applied Artificial Intelligence</h3>
+              <p>University of Warwick · Warwick Manufacturing Group (WMG)</p>
+              <span class="badge">Distinction</span>
+            </div>
+          </article>
+          <article class="timeline">
+            <span>2022–2024</span>
+            <div>
+              <h3>BSc (Hons) Computing</h3>
+              <p>Coventry University · Delivered through NIBM, Sri Lanka</p>
+              <span class="badge">First Class Honours</span>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="section wrap" id="awards">
+        <div class="section-label">05 / AWARDS</div>
+        <div>
+          <h2>Honours and awards</h2>
+          <article class="timeline">
+            <span>June 2025</span>
+            <div>
+              <h3>WMG Excellence Scholarship</h3>
+              <p>University of Warwick · Merit-based scholarship</p>
+            </div>
+          </article>
+          <article class="timeline">
+            <span>July 2024</span>
+            <div>
+              <h3>Dean’s List Award</h3>
+              <p>
+                National Institute of Business Management, in partnership with
+                Coventry University · Outstanding BSc academic performance
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="section wrap" id="projects">
+        <div class="section-label">06 / PROJECTS</div>
+        <div>
+          <h2>Selected projects</h2>
+          <div class="grid projects">
+            <article>
+              <h3>Amazon Electronics Sentiment Analysis</h3>
+              <p>
+                Compared classical and deep-learning sentiment classifiers using
+                TF-IDF, Word2Vec and FastText, with class weighting, threshold
+                optimisation and explainability using LIME, SHAP and occlusion.
+              </p>
+              <a
+                href="https://github.com/kaveenprabodhya/comparative_analysis_of_amazon_electronics_reviews"
+                >View code ↗</a
+              >
+            </article>
+            <article>
+              <h3>Diabetes Discovery</h3>
+              <p>
+                Applied supervised and unsupervised learning to over 250,000 CDC
+                Diabetes Health Indicators records to predict diabetes risk and
+                identify population-risk profiles.
+              </p>
+              <a
+                href="https://github.com/kaveenprabodhya/Diabetes-Discovery-ML-Project"
+                >View code ↗</a
+              >
+            </article>
+          </div>
+          <p>
+            <a href="https://github.com/kaveenprabodhya"
+              >Explore all repositories on GitHub ↗</a
+            >
+          </p>
+        </div>
+      </section>
+      <section class="section wrap" id="skills">
+        <div class="section-label">07 / SKILLS</div>
+        <div>
+          <h2>Skills</h2>
+          <dl class="skills-list">
+            <dt>Artificial intelligence &amp; machine learning</dt>
+            <dd>
+              Deep learning, NLP, generative AI, large language models,
+              multi-agent systems, RAG, computer vision, explainable AI,
+              supervised and unsupervised learning.
+            </dd>
+            <dt>Research</dt>
+            <dd>
+              Experimental design, statistical analysis, quantitative research,
+              survey design and validation, model evaluation, academic writing.
+            </dd>
+            <dt>Data science &amp; analytics</dt>
+            <dd>
+              Data preprocessing, feature engineering, statistical modelling,
+              data visualisation, predictive modelling.
+            </dd>
+            <dt>Programming &amp; frameworks</dt>
+            <dd>
+              Python, Java, SQL, PyTorch, TensorFlow, scikit-learn, OpenCV,
+              Spring Boot.
+            </dd>
+            <dt>Software engineering</dt>
+            <dd>
+              REST APIs, database systems, reactive programming, web
+              development, Git, CI/CD.
+            </dd>
+          </dl>
+        </div>
+      </section>
+      <section class="contact" id="contact">
+        <div class="wrap contact-inner">
+          <h2>Contact</h2>
+          <p>
+            I welcome conversations about research and potential collaborations
+            in human-centred AI.
+          </p>
+          <a class="button primary" href="mailto:kaveen.prabodhya@outlook.com"
+            >Email me ↗</a
+          >
+          <div class="social">
+            <a href="https://www.linkedin.com/in/kaveen-prabodhya/"
+              >LinkedIn ↗</a
+            ><a href="https://github.com/kaveenprabodhya">GitHub ↗</a
+            ><a
+              href="https://www.researchgate.net/profile/Kaveen-Weliweriya-Liyanage"
+              >ResearchGate ↗</a
+            ><a href="https://orcid.org/0009-0003-6975-5110">ORCID ↗</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="wrap footer">
+      <span>© Kaveen Weliweriya Liyanage</span><a href="#home">Back to top ↑</a>
+    </footer>
+    <script defer="" src="script.js"></script>
+  </body>
 </html>
